@@ -1,4 +1,4 @@
-import { mysqlTable, serial, timestamp, varchar, text } from 'drizzle-orm/mysql-core';
+import { mysqlTable, serial, timestamp, varchar, text, int } from 'drizzle-orm/mysql-core';
 
 export const users = mysqlTable('users', {
     id: serial('id').primaryKey().notNull(),
@@ -10,3 +10,6 @@ export const users = mysqlTable('users', {
     created_at: timestamp('created_at', { mode: 'string' }).defaultNow(),
     updated_at: timestamp('updated_at', { mode: 'string' }).defaultNow(),
 });
+
+export type User = typeof users.$inferSelect;
+export type NewUser = typeof users.$inferInsert;
